@@ -1,11 +1,44 @@
 {
   "tests": [
     {
-      "name": "Run all tests",
-      "setup": "",
-      "run": "cd build && ctest -VVV",
-      "timeout": 10,
-      "points": 0
+      "name": "TestCase 01: HashTable create",
+      "setup": "git submodule update --init --recursive && mkdir -p build && cd build && cmake .. && cmake --build .",
+      "run": "cd build && ctest -VVV -R \"create hash table\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 1
+    },
+    {
+      "name": "TestCase 02: HashTable::Search(key) ",
+      "setup": "git submodule update --init --recursive && mkdir -p build && cd build && cmake .. && cmake --build .",
+      "run": "cd build && ctest -VVV -R \"search by key\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 1
+    },
+    {
+      "name": "TestCase 03: HashTable::Put(key, value)",
+      "setup": "git submodule update --init --recursive && mkdir -p build && cd build && cmake .. && cmake --build .",
+      "run": "cd build && ctest -VVV -R \"put keys and valuest\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 1
+    },
+    {
+      "name": "TestCase 04: HashTable::Remove(key)",
+      "setup": "git submodule update --init --recursive && mkdir -p build && cd build && cmake .. && cmake --build .",
+      "run": "cd build && ctest -VVV -R \"remove by key\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 1
     }
   ]
 }
