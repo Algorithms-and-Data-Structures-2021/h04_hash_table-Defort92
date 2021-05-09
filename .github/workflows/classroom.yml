@@ -1,0 +1,36 @@
+name: GitHub Classroom Workflow
+
+on: 
+  push:
+    branches:
+    - master
+    - feedback
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: RelWithDebInfo
+
+jobs:
+  build:
+    name: Autograding
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+        
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{github.workspace}}/build
+
+      - name: Configure CMake
+        shell: bash
+        working-directory: ${{github.workspace}}/build
+        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+      
+      - name: Build
+        shell: bash
+        run: cmake --build . --config $BUILD_TYPE
+        working-directory: ${{github.workspace}}/build
+        
+      - uses: education/autograding@v1
