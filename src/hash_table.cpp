@@ -16,16 +16,32 @@ namespace itis {
     if (load_factor <= 0.0 || load_factor > 1.0) {
       throw std::logic_error("hash table load factor must be in range [0...1]");
     }
-
-    // Tip: allocate hash-table buckets
+    for (int i = 0; i < capacity; ++i) {
+      buckets_.emplace_back();
+    }
   }
 
   std::optional<std::string> HashTable::Search(int key) const {
     // Tip: compute hash code (index) and use linear search
+    if (num_keys_ == 0) {
+      return std::nullopt;
+    }
+    int index = hash(key);
+    auto bucket = buckets_[index];
+    if (bucket.empty()) {
+      return std::nullopt;
+    }
+
+    for (const auto &pair : bucket){
+      if (pair.first == key) {
+        return pair.second;
+      }
+    }
     return std::nullopt;
   }
 
   void HashTable::Put(int key, const std::string &value) {
+    num_keys_ += 1;
     // Tip 1: compute hash code (index) to determine which bucket to use
     // Tip 2: consider the case when the key exists (read the docs in the header file)
 
