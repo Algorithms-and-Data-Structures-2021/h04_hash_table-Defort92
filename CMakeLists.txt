@@ -14,6 +14,10 @@ add_library(${PROJECT_NAME} STATIC
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
+# setting up compiler options
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(${PROJECT_NAME} PUBLIC "$<$<CONFIG:DEBUG>:-Og>")
+endif ()
 
 # executables
 add_executable(main main.cpp)
